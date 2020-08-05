@@ -1,4 +1,4 @@
-# Skittles ChessGame
+# Skittles ChessApp
 
 A repository for a chess app in Python (NYJC J1 Computing Assignment 13)
 
