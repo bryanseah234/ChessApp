@@ -30,3 +30,5 @@
 #   return flask.send_file("favicon.ico")
 
 # app.run('0.0.0.0')
+
+f = open("chess.html")
