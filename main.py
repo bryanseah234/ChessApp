@@ -1,6 +1,7 @@
 from flask import Flask
 from flask import render_template, redirect
 from chess import WebInterface, Board
+from flask import request
 
 app = Flask(__name__)
 ui = WebInterface()
@@ -26,6 +27,7 @@ def newgame():
 def play():
     # TODO: get player move from GET request object
     # TODO: if there is no player move, render the page template
+
     return render_template('chess.html')
     # TODO: Validate move, redirect player back to /play again if move is invalid
     # If move is valid, check for pawns to promote
