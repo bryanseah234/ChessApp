@@ -117,7 +117,12 @@
             <div class="white">&#9814;</div>
             </div>
     </p>
-    <p>Add a form here to get player input. Don't forget the submit button.</p>
+    <p>
+    <form action="/input" methof="get">
+    <label>{{ game.turn }} player:</label>
+    <input type="text" name="player_input" value=""></p>
+    <br>
+    <input type="submit" value="Move">
     <p>We’ll have some code here to insert error messages, if any. Stay tuned.</p>
   </body>
   <footer>
