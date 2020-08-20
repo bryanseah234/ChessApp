@@ -33,8 +33,11 @@ def play():
     # TODO: if there is no player move, render the page template
 	if request.method == "POST":
 		Move = request.form['player_input']
-		start = game.prompt(Move)
-		print(start)
+		start, end = game.prompt(Move)
+		game.update(start,end)
+		ui.board = game.board_html()
+		ui.inputlabel = f'{game.turn} player: '
+		ui.errmsg = ""
 	return render_template('chess.html', ui=ui, game=game)
     # TODO: Validate move, redirect player back to /play again if move is invalid
     # If move is valid, check for pawns to promote
