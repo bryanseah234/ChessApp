@@ -20,7 +20,7 @@ def newgame():
     # in the global space are available to
     # top-level functions
     game.start()
-    ui.board = game.display()
+    ui.board = game.board_html()
     ui.inputlabel = f'{game.turn} player: '
     ui.errmsg = None
     ui.btnlabel = 'Move'
@@ -31,8 +31,8 @@ def newgame():
 def play():
     # TODO: get player move from GET request object
     # TODO: if there is no player move, render the page template
-	Move = request.form['Move']
-	return render_template('chess.html', ui=ui, game=game)
+	  Move = request.form['Move']
+	  return render_template('chess.html', ui=ui, game=game)
     # TODO: Validate move, redirect player back to /play again if move is invalid
     # If move is valid, check for pawns to promote
     # Redirect to /promote if there are pawns to promote, otherwise 

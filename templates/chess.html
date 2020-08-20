@@ -3,48 +3,51 @@
   <head>
     <meta charset="utf-8">
         <!-- Change your page title -->
-        <title>This is the page title</title>
+        <title>Chess Game</title>
         <link rel="stylesheet" href="{{url_for('static', filename='style.css')}}">
     <meta name="viewport" content="width=device-width">
     <title>repl.it</title>
-    <link href="style.css" rel="stylesheet" type="text/css" />
-    <style type="text/css">
-    .chessboard{
-        width:400px;
-        height:400px;
-        margin:0px;
-        text-align: centre;
-        margin-left:auto;
-        margin-right:auto;
-        border:5px solid #fff;}
-    .black{
-        float:left;
-        width:50px;
-        height:50px;
-        background-color:#AA6C3F;
-        font-size:30px;
-        text-align:center;
-        display:table-cell;
-        vertical-align:middle;}
-    .white{
-        float:left;
-        width:50px;
-        height:50px;
-        background-color:#fff;
-        font-size:30px;
-        text-align:center;
-        display:table-cell;
-        vertical-align:middle;}
-    .title{
-        text-align: center;
-        color: #000000;}
-    </style>
+    <link href="static/style.css" rel="stylesheet" type="text/css">
+    
   </head>
   <body style="background-color:#AA6C3F;">
         <div class="title">
             <h1>SKITTLES CHESS GAME</h1>
-        <div class="chessboard" style=text-align:"center">
-            <div class="white"style=colour:red;>&#9820;</div>
+        </div>
+        <p style="text-align:center">
+            <!-- <table>
+            {% set a = 0 %}
+            {% for row in ui.board %}
+            {% set b = a %}
+            <tr>
+                {% for cell in row %}
+                {% if a is divisibleby(2) %}
+                <td style="background-color:#AA6C3F">{{ cell }}</td>
+                {% else %}
+                <td style="background-color:#AA6C3F">{{ cell }}</td>
+                {% endif %}
+                {% set a = b + 1 %}
+                {% endfor %}
+            </tr>
+            {% endfor %}
+            </table> -->
+        <div class="chessboard" style="text-align:center">
+            {% set v_global = ['1'] %}
+            {% for row in ui.board %}
+                {% for cell in row %}
+                    <!-- {% set b = a %} -->
+                    {% if v_global|length is divisibleby(2) %}
+                    <div class="white">{{ cell }}</div>
+                    {% else %}
+                    <div class="black">{{ cell }}</div>
+                    {% endif %}
+                    {% if v_global.append('1') %}{% endif %}
+                {% endfor %}
+                {% if v_global.append('1') %}{% endif %}
+            {% endfor %}
+        </div>
+        <!-- <div class="chessboard" style="text-align:center">
+            <div class="white"></div>
             <div class="black">&#9822;</div>
             <div class="white">&#9821;</div>
             <div class="black">&#9819;</div>
@@ -115,10 +118,10 @@
             <div class="white">&#9815;</div>
             <div class="black">&#9816;</div>
             <div class="white">&#9814;</div>
-            </div>
+        </div> -->
     </p>
     <p>
-    <form action="/input" methof="get">
+    <form action="/input" method="post">
     <label>{{ game.turn }} player:</label>
     <input type="text" name="player_input" value=""></p>
     <br>
