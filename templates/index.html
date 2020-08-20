@@ -7,11 +7,11 @@
     <link href="style.css" rel="stylesheet" type="text/css" />
     <style type="text/css">
     .borders {
+		text-color: #fff;
         border: 1px solid #fff;
         display:inline;
         text-align: center;
-        text-align: center;
-        vertical-align:middle
+        vertical-align: middle;
         margin-right:auto;
         margin-left:auto;
         padding: 1em;
@@ -20,16 +20,18 @@
         color: #fff}
     </style>
   </head>
-  <body style="background-color:#AA6C3F">
+  <body style="background-color:#000000">
     <h1 class="title" style="text-align:center">SKITTLES CHESS GAME</h1>
     <p style="text-align:center">
-        <img width="400" height="400" src=https://upload.wikimedia.org/wikipedia/commons/6/6a/Mann_white_on_light_%28an_icon_of_the_chess_piece%29.png>
+        <img width="1080" height="720" src=https://images.unsplash.com/photo-1586165368502-1bad197a6461?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&w=1000&q=80>
     </p>
     <p style="text-align:center">
-    <div class="borders" style="text-align:center">
-        <a href="/newgame" style="color:#fff">NEW GAME</a>
+    <div class="borders">
+        <a href="/newgame" style="text-align:center">NEW GAME</a>
     </div>
     </p>
         <script src="script.js"></script>
+		<script>$(function () {$('[data-toggle="tooltip"]').tooltip()})
+</script>
   </body>
 </html>

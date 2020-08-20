@@ -8,11 +8,10 @@
     <meta name="viewport" content="width=device-width">
     <title>repl.it</title>
     <link href="static/style.css" rel="stylesheet" type="text/css">
-    
   </head>
-  <body style="background-color:#AA6C3F;">
+  <body style="background-color:#000000">
         <div class="title">
-            <h1>SKITTLES CHESS GAME</h1>
+            <h1 style="color:#fff">SKITTLES CHESS GAME</h1>
         </div>
         <p style="text-align:center">
             <!-- <table>
@@ -37,9 +36,9 @@
                 {% for cell in row %}
                     <!-- {% set b = a %} -->
                     {% if v_global|length is divisibleby(2) %}
-                    <div class="white">{{ cell }}</div>
+                    <div class="white" style="background-color:#fff">{{ cell }}</div>
                     {% else %}
-                    <div class="black">{{ cell }}</div>
+                    <div class="black" style="background-color:#000000">{{ cell }}</div>
                     {% endif %}
                     {% if v_global.append('1') %}{% endif %}
                 {% endfor %}
@@ -120,16 +119,16 @@
             <div class="White">&#9814;</div>
         </div> -->
     </p>
-    <p style="text-align:center">
-    <form action="/play" method="post" style="text-align:center">
-    <label>{{ game.turn }} PLAYER:</label>
+    <p style="text-align:center" style="color:#fff">
+    <form action="/play" method="post" style="text-align:center" style="color:#fff">
+    <label style="color:#fff">{{ game.turn }} Player's Turn:</label>
     <input type="text" name="player_input" value=""></p>
     <br>
-    <input type="submit" value="Move" style="text-align:center">
-    <p>{{ ui.errmsg  }}</p>
+    <input type="submit" value="Move" style="text-align:center" style="color:#fff">
+    <p style="color:#fff">{{ ui.errmsg  }}</p>
   </body>
   <footer>
-    <div class="credits" style="text-align:center">
-        <h4>Copyright © Vina, Bryan, David</h4>
+    <div class="credits" style="text-align:center" style="color:#fff">
+        <h4 style="color:#fff">Copyright © Vina, Bryan, David</h4>
 </footer>
 </html>
