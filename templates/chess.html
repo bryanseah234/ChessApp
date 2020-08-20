@@ -120,16 +120,16 @@
             <div class="white">&#9814;</div>
         </div> -->
     </p>
-    <p>
-    <form action="/play" method="post">
+    <p style="text-align:center">
+    <form action="/play" method="post" style="text-align:center">
     <label>{{ game.turn }} player:</label>
     <input type="text" name="player_input" value=""></p>
     <br>
-    <input type="submit" value="Move">
-    <p>We’ll have some code here to insert error messages, if any. Stay tuned.</p>
+    <input type="submit" value="Move" style="text-align:center">
+    <p>{{ ui.errmsg  }}</p>
   </body>
   <footer>
-    <div class="credits">
+    <div class="credits" style="text-align:center">
         <h4>Copyright © Vina, Bryan, David</h4>
 </footer>
 </html>
