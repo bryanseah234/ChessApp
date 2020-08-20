@@ -170,6 +170,7 @@ class Board:
         self._position = {}
         self.winner = None
         self.checkmate = None
+        self.webdisplay = self.board_html()
     
     def coords(self):
         return list(self._position.keys())
@@ -372,6 +373,10 @@ class Board:
             return f'{colour_sym}{piece_sym}'
 
         # Row 7 is at the top, so print in reverse order
+        list_=list()
+        for i in range(8):
+            a = list(' '*8)
+            list_.append(a)
         print(' ' * 4, end='')
         print('  '.join([f'{i:2}' for i in range(8)]), end='\n\n')
         for row in range(7, -1, -1):
@@ -381,6 +386,7 @@ class Board:
                 if coord in self.coords():
                     piece = self.get_piece(coord)
                     print(f'{sym(piece)}', end='')
+                    list_[row][col] = f'{piece}'
                 else:
                     piece = None
                     print('  ', end='')
@@ -391,6 +397,34 @@ class Board:
             print(' '*15)
             if self.checkmate is not None:
                 print(f'{self.checkmate} is checkmated!')
+        
+
+    def board_html(self):
+        symbol_dir = {"queen":{"white": "♔", "black": "♚"},
+        "king" : {"white": "♕", "black": "♛"},
+        "bishop" : {"white": "♗", "black": "♝"},
+        "knight" : {"white": "♘", "black": "♞"},
+        "rook" : {"white": "♖", "black": "♜"},
+        "pawn" : {"white": "♙", "black": "♟"}}
+        list_ = list()
+        for i in range(8):
+            a = list(' '*8)
+            list_.append(a)
+        for row in range(7, -1, -1):
+            for col in range(8):
+                coord = (col, row)  # tuple
+                if coord in self.coords():
+                    piece = self.get_piece(coord)
+                    if piece == None:
+                        list_[abs(row-7)][col] = ' '
+                    else:
+                        list_[abs(row-7)][col] = f'{symbol_dir[piece.name][piece.colour]}'
+                        pass
+                else:
+                    piece = None
+            
+        return list_
+
 
     def prompt(self):
         if self.debug:
