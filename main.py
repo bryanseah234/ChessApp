@@ -1,4 +1,4 @@
-from flask import Flask
+33from flask import Flask
 from flask import render_template, redirect
 from chess import WebInterface, Board
 from flask import request
