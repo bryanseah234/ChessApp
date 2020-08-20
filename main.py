@@ -27,7 +27,7 @@ def newgame():
     return redirect('/play')
     return render_template('chess.html', ui=ui)
 
-@app.route('/play')
+@app.route('/play',methods=['POST', 'GET'])
 def play():
     # TODO: get player move from GET request object
     # TODO: if there is no player move, render the page template
