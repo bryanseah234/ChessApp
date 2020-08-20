@@ -16,8 +16,8 @@ class BasePiece:
     def __init__(self,colour):
         if type(colour) != str:
             raise TypeError('colour argument must be str')
-        elif colour.lower() not in {'white','black'}:
-            raise ValueError('colour must be {white,black}')
+        elif colour.title() not in {'White','Black'}:
+            raise ValueError('colour must be {White,Black}')
         else:
             self.colour = colour
 
@@ -98,9 +98,9 @@ class Rook(BasePiece):
     def isvalid(self, start: tuple, end: tuple, **kwargs):
         x, y, dist = self.vector(start, end)
         if kwargs.get('castling', False):
-            if self.colour == 'white':
+            if self.colour == 'White':
                 row = 0
-            elif self.colour == 'black':
+            elif self.colour == 'Black':
                 row = 7
             if start[1] != end[1] != row:
                 return False
@@ -125,8 +125,8 @@ class Pawn(BasePiece):
         x, y, dist = self.vector(start, end)
         xmove = 1 if kwargs.get('capture', False) else 0
         if x == xmove:
-            if self.colour == 'black' and y == -1 \
-                    or self.colour == 'white' and y == 1:
+            if self.colour == 'Black' and y == -1 \
+                    or self.colour == 'White' and y == 1:
                 return True
         return False
 
@@ -135,14 +135,14 @@ class Board:
     '''
     ATTRIBUTES
 
-    turn <{'white', 'black'}>
+    turn <{'White', 'Black'}>
         The current player's colour.
     
-    winner <{'white', 'black', None}>
+    winner <{'White', 'Black', None}>
         The winner (if game has ended).
         If game has not ended, returns None
 
-    checkmate <{'white', 'black', None}>
+    checkmate <{'White', 'Black', None}>
         Whether any player is checkmated.
 
     METHODS
@@ -222,7 +222,7 @@ class Board:
         for coord in self.coords():
             row = coord[1]
             piece = self.get_piece(coord)
-            for opprow, colour in zip([0, 7], ['black', 'white']):
+            for opprow, colour in zip([0, 7], ['Black', 'White']):
                 if row == opprow and piece.name == 'pawn' \
                         and piece.colour == colour:
                     if PieceClass is None:
@@ -328,7 +328,7 @@ class Board:
             print('')
 
     def start(self):
-        colour = 'black'
+        colour = 'Black'
         self.add((0, 7), Rook(colour))
         self.add((1, 7), Knight(colour))
         self.add((2, 7), Bishop(colour))
@@ -340,7 +340,7 @@ class Board:
         for x in range(0, 8):
             self.add((x, 6), Pawn(colour))
 
-        colour = 'white'
+        colour = 'White'
         self.add((0, 0), Rook(colour))
         self.add((1, 0), Knight(colour))
         self.add((2, 0), Bishop(colour))
@@ -352,7 +352,7 @@ class Board:
         for x in range(0, 8):
             self.add((x, 1), Pawn(colour))
         
-        self.turn = 'white'
+        self.turn = 'White'
 
         for piece in self.pieces():
             piece.notmoved = True
@@ -361,7 +361,7 @@ class Board:
         '''
         Displays the contents of the board.
         Each piece is represented by two letters.
-        First letter is the colour (W for white, B for black).
+        First letter is the colour (W for White, B for Black).
         Second letter is the name (Starting letter for each piece).
         '''
         if self.debug:
@@ -400,12 +400,12 @@ class Board:
         
 
     def board_html(self):
-        symbol_dir = {"queen":{"white": "♔", "black": "♚"},
-        "king" : {"white": "♕", "black": "♛"},
-        "bishop" : {"white": "♗", "black": "♝"},
-        "knight" : {"white": "♘", "black": "♞"},
-        "rook" : {"white": "♖", "black": "♜"},
-        "pawn" : {"white": "♙", "black": "♟"}}
+        symbol_dir = {"queen":{"White": "♔", "Black": "♚"},
+        "king" : {"White": "♕", "Black": "♛"},
+        "bishop" : {"White": "♗", "Black": "♝"},
+        "knight" : {"White": "♘", "Black": "♞"},
+        "rook" : {"White": "♖", "Black": "♜"},
+        "pawn" : {"White": "♙", "Black": "♟"}}
         list_ = list()
         for i in range(8):
             a = list(' '*8)
@@ -488,15 +488,15 @@ class Board:
             raise MoveError('Unknown error, please report '
                              f'(movetype={repr(movetype)}).')
         self.promotepawns()
-        if not self.alive('white', 'king'):
-            self.winner = 'black'
-        elif not self.alive('black', 'king'):
-            self.winner = 'white'
+        if not self.alive('White', 'king'):
+            self.winner = 'Black'
+        elif not self.alive('Black', 'king'):
+            self.winner = 'White'
 
     def next_turn(self):
         if self.debug:
             print('== NEXT TURN ==')
-        if self.turn == 'white':
-            self.turn = 'black'
-        elif self.turn == 'black':
-            self.turn = 'white'
+        if self.turn == 'White':
+            self.turn = 'Black'
+        elif self.turn == 'Black':
+            self.turn = 'White'

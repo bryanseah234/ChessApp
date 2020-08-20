@@ -43,7 +43,7 @@ def play():
 			game.next_turn()
 			ui.inputlabel = f'{game.turn} player: '
 	except Exception as e:
-		ui.errmsg = "Error: " + str(e)
+		ui.errmsg = "ERROR: " + str(e)
 		return render_template('chess.html', ui=ui, game=game)
 	return render_template('chess.html', ui=ui, game=game)
     # TODO: Validate move, redirect player back to /play again if move is invalid
