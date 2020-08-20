@@ -3,9 +3,12 @@ from flask import render_template, redirect
 from chess import WebInterface, Board
 from flask import request
 
+
 app = Flask(__name__)
 ui = WebInterface()
 game = Board()
+
+
 
 @app.route('/')
 def root():
@@ -22,14 +25,14 @@ def newgame():
     ui.errmsg = None
     ui.btnlabel = 'Move'
     return redirect('/play')
+    return render_template('chess.html', ui=ui)
 
-@app.route('/play')
+@app.route('/play',methods=['POST', 'GET'])
 def play():
     # TODO: get player move from GET request object
     # TODO: if there is no player move, render the page template
-    # Move = request.form['Move']
-    return render_template('chess.html', ui=ui, game=game)
-
+	  Move = request.form['Move']
+	  return render_template('chess.html', ui=ui, game=game)
     # TODO: Validate move, redirect player back to /play again if move is invalid
     # If move is valid, check for pawns to promote
     # Redirect to /promote if there are pawns to promote, otherwise 
@@ -39,8 +42,6 @@ def promote():
     pass
 
 
-
 app.run('0.0.0.0')
 
-print(ui.board)
 
