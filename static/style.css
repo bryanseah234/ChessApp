@@ -1,6 +1,8 @@
-.borders{
-	text-align: center;
-	color: #fff;
+.myDiv {
+    text-align: center;
+    width: 300px;
+	color: white;
+	border: 1px solid #fff;
 }
 .chessboard{
         width:400px;
