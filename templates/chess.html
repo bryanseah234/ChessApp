@@ -31,6 +31,7 @@
             </tr>
             {% endfor %}
             </table> -->
+		<center>
         <div class="chessboard" style="text-align:center">
             {% set v_global = ['1'] %}
             {% for row in ui.board %}
@@ -46,6 +47,7 @@
                 {% if v_global.append('1') %}{% endif %}
             {% endfor %}
         </div>
+		</center>
         <!-- <div class="chessboard" style="text-align:center">
             <div class="White"></div>
             <div class="Black">&#9822;</div>
