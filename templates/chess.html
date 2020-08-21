@@ -126,9 +126,11 @@
     <form action="/play" method="post" style="text-align:center" style="color:#fff">
     <label style="color:#fff">{{ game.turn }} Player's Turn:</label>
     <input type="text" name="player_input" value=""></p>
-    <br>
-    <input type="submit" value="Move" style="text-align:center" style="color:#fff">
-    <p style="color:#fff">{{ ui.errmsg  }}</p>
+	<p style="color:#fff">{{ ui.errmsg  }}</p>
+    <input type="submit" value="MOVE" style="text-align:center" style="color:#fff">
+	<input type="submit" value="UNDO" style="text-align:center" style="color:#fff">
+	<br>
+    <!-- <p style="color:#fff">{{ ui.errmsg  }}</p> -->
   </body>
   <footer>
     <div class="credits" style="text-align:center" style="color:#fff">

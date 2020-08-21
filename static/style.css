@@ -1,9 +1,20 @@
-.myDiv {
+.button {
+        background-color: #be2323;
+        border: 5px;
+        color: #5ea1a1;
+        padding: 20px 34px;
+        text-align: center;
+        display: inline-block;
+        font-size: 20px;
+        margin: 4px 2px;
+        cursor: pointer;
+}
+/* .myDiv {
     text-align: center;
     width: 300px;
 	color: white;
 	border: 1px solid #fff;
-}
+} */
 .chessboard{
         width:400px;
         height:400px;
