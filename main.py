@@ -2,11 +2,13 @@ from flask import Flask
 from flask import render_template, redirect
 from chess import WebInterface, Board
 from flask import request
+from MoveHistory import MoveHistory
 
 
 app = Flask(__name__)
 ui = WebInterface()
 game = Board()
+history = MoveHistory(10)
 
 
 
@@ -38,6 +40,10 @@ def play():
 		if not game.validation(Move):
 			start, end = game.prompt(Move)
 			game.update(start,end)
+			movety = game.movetype(start,end)
+			coordinate = (start, end)
+			mov = (movety,coordinate)
+			history.push(mov)
 			ui.board = game.board_html()
 			game.next_turn()
 			ui.inputlabel = f'{game.turn} player: '
@@ -54,6 +60,9 @@ def play():
 @app.route('/promote')
 def promote():
     pass
+@app.route('/undo')
+def undo():
+	
 
 
 app.run('0.0.0.0')
