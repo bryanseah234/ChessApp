@@ -38,9 +38,9 @@
                 {% for cell in row %}
                     <!-- {% set b = a %} -->
                     {% if v_global|length is divisibleby(2) %}
-                    <div class="white" style="background-color:#fff">{{ cell }}</div>
+                    <div class="white" style="background-color:#ffffff">{{ cell }}</div>
                     {% else %}
-                    <div class="black" style="background-color:#000000">{{ cell }}</div>
+                    <div class="black" style="background-color:#ce6b3dfb">{{ cell }}</div>
                     {% endif %}
                     {% if v_global.append('1') %}{% endif %}
                 {% endfor %}
