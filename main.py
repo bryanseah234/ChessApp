@@ -2,12 +2,14 @@ from flask import Flask
 from flask import render_template, redirect
 from chess import WebInterface, Board
 from flask import request
+from MoveHistory import MoveHistory
+from copy import copy
 
 
 app = Flask(__name__)
 ui = WebInterface()
 game = Board()
-
+history = MoveHistory(10)
 
 
 @app.route('/')
@@ -31,20 +33,21 @@ def newgame():
 def play():
     # TODO: get player move from GET request object
     # TODO: if there is no player move, render the page template
-	errmsg = None
-	ui.errmsg = None
 	if request.method == "POST":
 		Move = request.form['player_input']
 		ui.errmsg = ' '
 		if not game.validation(Move):
+			history.push(copy(game._position))
 			start, end = game.prompt(Move)
 			game.update(start,end)
 			ui.board = game.board_html()
-			history.push(ui.board)
 			game.next_turn()
 			ui.inputlabel = f'{game.turn} player: '
+			return render_template('chess.html', ui=ui, game=game)
 		else:
 			ui.errmsg = game.validation(Move)
+			return render_template('chess.html', ui=ui, game=game)
+	ui.board = game.board_html()
 	return render_template('chess.html', ui=ui, game=game)
     # TODO: Validate move, redirect player back to /play again if move is invalid
     # If move is valid, check for pawns to promote
@@ -54,6 +57,16 @@ def play():
 def promote():
     pass
 
+@app.route('/undo',methods=['POST', 'GET'])
+def undo():
+	move = history.pop()
+	if move == None:
+		ui.errmsg = "Invalid undo. MoveHistory is empty."
+		return redirect('/play')
+	game._position = move
+	game.next_turn()
+	
+	return redirect('/play')
 
 app.run('0.0.0.0')
 

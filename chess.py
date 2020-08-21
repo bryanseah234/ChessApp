@@ -462,7 +462,47 @@ class Board:
                 errmsg = [f'Invalid move. Please make a valid move.']
                 # return errmsg
             else:
-                return start, end, errmsg
+                return start, end
+    
+    def validation(self, inputstr):
+        if self.debug:
+            print('== PROMPT ==')
+        def valid_format(inputstr):
+            return len(inputstr) == 5 and inputstr[2] == ' ' \
+                and inputstr[0:1].isdigit() \
+                and inputstr[3:4].isdigit()
+
+        def valid_num(inputstr):
+            for char in (inputstr[0:1] + inputstr[3:4]):
+                if char not in '01234567':
+                    return False
+            return True
+
+        def split_and_convert(inputstr):
+            '''Convert 5-char inputstr into start and end tuples.'''
+            start, end = inputstr.split(' ')
+            start = (int(start[0]), int(start[1]))
+            end = (int(end[0]), int(end[1]))
+            return (start, end)
+
+        # while True:
+        errmsg = None
+        # inputstr = input(f'{self.turn.title()} player: ')
+        if not valid_format(inputstr):
+            errmsg = f"Invalid move. Please enter your move in the following format: __ __, _ represents a digit."
+            return errmsg
+        elif not valid_num(inputstr):
+            errmsg = f'Invalid move. Move digits should be 0-7.'
+            return errmsg
+        else:
+            start, end = split_and_convert(inputstr)
+            if self.movetype(start, end) is None:
+                errmsg = f'Invalid move. Please make a valid move.'
+                return errmsg
+            else:
+                return False
+
+	
                 
     def update(self, start, end):
         '''
