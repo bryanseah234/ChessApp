@@ -60,10 +60,12 @@ def play():
 @app.route('/promote')
 def promote():
     pass
+
+
 @app.route('/undo')
 def undo():
+	pass
 	
-
 
 app.run('0.0.0.0')
 
