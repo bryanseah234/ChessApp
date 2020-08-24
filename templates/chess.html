@@ -123,11 +123,11 @@
         </div> -->
     </p>
     <p style="text-align:center" style="color:#fff">
-    <form action="/play" method="post" style="text-align:center" style="color:#fff">
-    <label style="color:#fff">{{ game.turn }} Player's Turn:</label>
+    <form action={{ ui.direct }} method="post" style="text-align:center" style="color:#fff">
+    <label style="color:#fff">{{ ui.inputlabel }}</label>
     <input type="text" name="player_input" value=""></p>
 	<p style="color:#fff">{{ ui.errmsg  }}</p>
-    <input type="submit" value="MOVE" style="text-align:center" style="color:#fff">
+    <input type="submit" value={{ ui.btnlabel }} style="text-align:center" style="color:#fff">
 	<input type="submit" value="UNDO" style="text-align:center" style="color:#fff">
 	<br>
     <!-- <p style="color:#fff">{{ ui.errmsg  }}</p> -->
