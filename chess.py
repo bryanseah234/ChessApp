@@ -173,7 +173,7 @@ class Board:
         self.winner = None
         self.checkmate = None
         self.webdisplay = self.board_html()
-        self.promote = False
+        self.promotion = False
     
     def coords(self):
         return list(self._position.keys())
@@ -228,12 +228,14 @@ class Board:
             for opprow, colour in zip([0, 7], ['Black', 'White']):
                 if row == opprow and piece.name == 'pawn' \
                         and piece.colour == colour:
-                        self.promote = True
+                        self.promotion = True
                         return coord
+                else:
+                    self.promotion = False
 
 
-    @classmethod
-    def promoteprompt(cls):
+    # @classmethod
+    def promoteprompt(self, choice):
         # choice = input(f'Promote pawn to '
         #             '(r=Rook, k=Knight, b=Bishop, '
         #             'q=Queen): ').lower()
@@ -498,7 +500,7 @@ class Board:
         errmsg = None
         # inputstr = input(f'{self.turn.title()} player: ')
         if not valid_format(inputstr):
-            errmsg = str('INVALID MOVE\n(Please enter your move in the following format: __ __, _ represents a digit.)')
+            errmsg = str('INVALID MOVE\n(Please enter your move in the following format: __ __, _ represents a digit.')
             return errmsg
         elif not valid_num(inputstr):
             errmsg = str('Invalid move\n(Move digits should be 0-7.)')

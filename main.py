@@ -42,11 +42,11 @@ def play():
 			game.update(start,end)
 			coord = game.promotepawns()
             # colour = game.get_piece(coord).colour
-			if game.promote == True:
-				ui.direct = "/promote"
-				ui.inputlabel = f'{game.turn} pawn promote to:'
-				ui.btnlabel = "PROMOTE"
-				return redirect('/promote', ui=ui, game=game)
+			if game.promotion == True:
+				# ui.direct = "/promote"
+				# ui.inputlabel = f'{game.turn} pawn promote to:'
+				# ui.btnlabel = "PROMOTE"
+				return redirect('/promote')
 			ui.board = game.board_html()
 			game.next_turn()
 			ui.inputlabel = f'{game.turn} player: '
@@ -62,21 +62,24 @@ def play():
 
 @app.route('/promote', methods=['POST', 'GET'])
 def promote():
+    ui.board = game.board_html()
     ui.inputlabel = f'{game.turn} pawn promote to:'
     ui.btnlabel = "PROMOTE"
+    ui.direct = "/promote"
     if request.method == "POST":
         promote = request.form['player_input']
         ui.errmsg = ' '
-        if game.promoteprompt() == False:
+        if game.promoteprompt(promote) == False:
             ui.errmsg = f'Invalid promotion. Please choose from r, k, b, and q'
-            return render_template('chess.html', ui=ui, game=game)
+            return redirect('/promote')
         else:
             game.promote(promote)
-    ui.board = game.board_html()
-    game.next_turn()
-    ui.inputlabel = f'{game.turn} player: '
-    ui.btnlabel = "MOVE"
-    ui.direct = "/play"
+            ui.board = game.board_html()
+            game.next_turn()
+            ui.inputlabel = f'{game.turn} player: '
+            ui.btnlabel = "MOVE"
+            ui.direct = "/play"
+            return redirect('/play')
     return render_template('chess.html', ui=ui, game=game)
 
 
