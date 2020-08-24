@@ -477,7 +477,11 @@ class Board:
             else:
                 return start, end
 
+    
     def validation(self, inputstr):
+        if self.debug:
+            print('== PROMPT ==')
+
         def valid_format(inputstr):
             return len(inputstr) == 5 and inputstr[2] == ' ' \
                 and inputstr[0:1].isdigit() \
@@ -500,15 +504,16 @@ class Board:
         errmsg = None
         # inputstr = input(f'{self.turn.title()} player: ')
         if not valid_format(inputstr):
-            errmsg = str('INVALID MOVE\n(Please enter your move in the following format: __ __, _ represents a digit.')
+            errmsg = f"Invalid move. Please enter your move in the following format: __ __, _ represents a digit."
             return errmsg
         elif not valid_num(inputstr):
-            errmsg = str('Invalid move\n(Move digits should be 0-7.)')
+            errmsg = f'Invalid move. Move digits should be 0-7.'
             return errmsg
         else:
             start, end = split_and_convert(inputstr)
             if self.movetype(start, end) is None:
-                errmsg= str('Invalid move\nPlease make a valid move.)')
+
+                errmsg = f'Invalid move. Please make a valid move.'
                 return errmsg
             else:
                 return False
