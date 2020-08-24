@@ -23,7 +23,9 @@ def newgame():
     ui.board = game.board_html()
     ui.inputlabel = f'{game.turn} player: '
     ui.errmsg = ' '
-    ui.btnlabel = 'Move'
+    ui.btnlabel = 'MOVE'
+    ui.direct = '/play'
+    ui.winner = game.winner
     return redirect('/play')
     return render_template('chess.html', ui=ui)
 
@@ -38,6 +40,13 @@ def play():
 		if not game.validation(Move):
 			start, end = game.prompt(Move)
 			game.update(start,end)
+			coord = game.promotepawns()
+            # colour = game.get_piece(coord).colour
+			if game.promote == True:
+				ui.direct = "/promote"
+				ui.inputlabel = f'{game.turn} pawn promote to:'
+				ui.btnlabel = "PROMOTE"
+				return redirect('/promote', ui=ui, game=game)
 			ui.board = game.board_html()
 			game.next_turn()
 			ui.inputlabel = f'{game.turn} player: '
@@ -51,9 +60,24 @@ def play():
     # If move is valid, check for pawns to promote
     # Redirect to /promote if there are pawns to promote, otherwise 
 
-@app.route('/promote')
+@app.route('/promote', methods=['POST', 'GET'])
 def promote():
-    pass
+    ui.inputlabel = f'{game.turn} pawn promote to:'
+    ui.btnlabel = "PROMOTE"
+    if request.method == "POST":
+        promote = request.form['player_input']
+        ui.errmsg = ' '
+        if game.promoteprompt() == False:
+            ui.errmsg = f'Invalid promotion. Please choose from r, k, b, and q'
+            return render_template('chess.html', ui=ui, game=game)
+        else:
+            game.promote(promote)
+    ui.board = game.board_html()
+    game.next_turn()
+    ui.inputlabel = f'{game.turn} player: '
+    ui.btnlabel = "MOVE"
+    ui.direct = "/play"
+    return render_template('chess.html', ui=ui, game=game)
 
 
 app.run('0.0.0.0')
