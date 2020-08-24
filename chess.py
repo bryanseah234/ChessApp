@@ -4,6 +4,8 @@ class WebInterface:
         self.btnlabel = None
         self.errmsg = None
         self.board = None
+        self.winner = None
+        self.direct = None
 
 
 
@@ -171,6 +173,7 @@ class Board:
         self.winner = None
         self.checkmate = None
         self.webdisplay = self.board_html()
+        self.promotion = False
     
     def coords(self):
         return list(self._position.keys())
@@ -225,11 +228,35 @@ class Board:
             for opprow, colour in zip([0, 7], ['Black', 'White']):
                 if row == opprow and piece.name == 'pawn' \
                         and piece.colour == colour:
-                    if PieceClass is None:
-                        PieceClass = self.promoteprompt()
-                    promoted_piece = PieceClass(colour)
-                    self.remove(coord)
-                    self.add(coord, promoted_piece)
+                        self.promotion = True
+                        return coord
+                else:
+                    self.promotion = False
+
+
+    # @classmethod
+    def promoteprompt(self, choice):
+        # choice = input(f'Promote pawn to '
+        #             '(r=Rook, k=Knight, b=Bishop, '
+        #             'q=Queen): ').lower()
+        if choice not in 'rkbq':
+            return False
+        else:
+            return True
+
+    def promote(self, choice):
+        coord= self.promotepawns()
+        colour = self.turn
+        if choice == 'r':
+            promoted_piece = Rook(colour)
+        elif choice == 'k':
+            promoted_piece = Knight(colour)
+        elif choice == 'b':
+            promoted_piece = Bishop(colour)
+        elif choice == 'q':
+            promoted_piece = Queen(colour)
+        self.remove(coord)
+        self.add(coord, promoted_piece)
 
     def king_and_rook_unmoved(self, colour, rook_coord):
         row = rook_coord[1]
@@ -300,21 +327,7 @@ class Board:
                 return None
         return True
 
-    @classmethod
-    def promoteprompt(cls):
-        choice = input(f'Promote pawn to '
-                    '(r=Rook, k=Knight, b=Bishop, '
-                    'q=Queen): ').lower()
-        if choice not in 'rkbq':
-            return cls.promoteprompt()
-        elif choice == 'r':
-            return Rook
-        elif choice == 'k':
-            return Knight
-        elif choice == 'b':
-            return Bishop
-        elif choice == 'q':
-            return Queen
+    
 
     def printmove(self, start, end, **kwargs):
         startstr = f'{start[0]}{start[1]}'
@@ -451,22 +464,24 @@ class Board:
         errmsg = None
         # inputstr = input(f'{self.turn.title()} player: ')
         if not valid_format(inputstr):
-            errmsg = [f"Invalid move. Please enter your move in the following format: __ __, _ represents a digit."]
+            errmsg = str('Invalid move. Please enter your move in the following format: __ __, _ represents a digit.')
             # return errmsg
         elif not valid_num(inputstr):
-            errmsg = [f'Invalid move. Move digits should be 0-7.']
+            errmsg = str('Invalid move. Move digits should be 0-7.')
             # return errmsg
         else:
             start, end = split_and_convert(inputstr)
             if self.movetype(start, end) is None:
-                errmsg = [f'Invalid move. Please make a valid move.']
+                errmsg= str('Invalid move. Please make a valid move.')
                 # return errmsg
             else:
                 return start, end
+
     
     def validation(self, inputstr):
         if self.debug:
             print('== PROMPT ==')
+
         def valid_format(inputstr):
             return len(inputstr) == 5 and inputstr[2] == ' ' \
                 and inputstr[0:1].isdigit() \
@@ -497,12 +512,11 @@ class Board:
         else:
             start, end = split_and_convert(inputstr)
             if self.movetype(start, end) is None:
+
                 errmsg = f'Invalid move. Please make a valid move.'
                 return errmsg
             else:
                 return False
-
-	
                 
     def update(self, start, end):
         '''
