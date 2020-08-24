@@ -97,7 +97,7 @@ def undo():
 		return redirect('/play')
 	game._position = move
 	game.next_turn()
-	
+	ui.inputlabel = f'{game.turn} player: '
 	return redirect('/play')
 
 app.run('0.0.0.0')
