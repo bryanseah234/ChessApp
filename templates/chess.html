@@ -3,12 +3,12 @@
   <head>
     <meta charset="utf-8">
         <!-- Change your page title -->
-        <title>Chess Game</title>
-        <link rel="stylesheet" href="static/style.css">
+        <title>Skittles Chess Game</title>
+        <link rel="stylesheet" href="static/style_a.css">
 		
     <meta name="viewport" content="width=device-width">
     <title>repl.it</title>
-    <link href="static/style.css" rel="stylesheet" type="text/css">
+    <link href="static/style_a.css" rel="stylesheet" >
   </head>
   <body style="background-color:#000000">
         <div class="title">
@@ -33,8 +33,11 @@
             </table> -->
 		<center>
         <div class="chessboard" style="text-align:center">
+            {% set a_global = ['1','1','1','1','1','1','1','1'] %}
+            {% set b_global = ['1'] %}
             {% set v_global = ['1'] %}
             {% for row in ui.board %}
+            <div class="white" style="background-color:#ffffff">{{ a_global|length - b_global|length }}</div>
                 {% for cell in row %}
                     <!-- {% set b = a %} -->
                     {% if v_global|length is divisibleby(2) %}
@@ -45,95 +48,35 @@
                     {% if v_global.append('1') %}{% endif %}
                 {% endfor %}
                 {% if v_global.append('1') %}{% endif %}
+                {% if b_global.append('1') %}{% endif %}
             {% endfor %}
+            <div class="black" style="background-color:#ffffff"> </div>
+            <div class="white" style="background-color:#ffffff">0</div>
+            <div class="white" style="background-color:#ffffff">1</div>
+            <div class="white" style="background-color:#ffffff">2</div>
+            <div class="white" style="background-color:#ffffff">3</div>
+            <div class="white" style="background-color:#ffffff">4</div>
+            <div class="white" style="background-color:#ffffff">5</div>
+            <div class="white" style="background-color:#ffffff">6</div>
+            <div class="white" style="background-color:#ffffff">7</div>
         </div>
+        
 		</center>
-        <!-- <div class="chessboard" style="text-align:center">
-            <div class="White"></div>
-            <div class="Black">&#9822;</div>
-            <div class="White">&#9821;</div>
-            <div class="Black">&#9819;</div>
-            <div class="White">&#9818;</div>
-            <div class="Black">&#9821;</div>
-            <div class="White">&#9822;</div>
-            <div class="Black">&#9820;</div>
-
-            <div class="Black">&#9823;</div>
-            <div class="White">&#9823;</div>
-            <div class="Black">&#9823;</div>
-            <div class="White">&#9823;</div>
-            <div class="Black">&#9823;</div>
-            <div class="White">&#9823;</div>
-            <div class="Black">&#9823;</div>
-            <div class="White">&#9823;</div>
-
-            <div class="White"></div>
-            <div class="Black"></div>
-            <div class="White"></div>
-            <div class="Black"></div>
-            <div class="White"></div>
-            <div class="Black"></div>
-            <div class="White"></div>
-            <div class="Black"></div>
-
-            <div class="Black"></div>
-            <div class="White"></div>
-            <div class="Black"></div>
-            <div class="White"></div>
-            <div class="Black"></div>
-            <div class="White"></div>
-            <div class="Black"></div>
-            <div class="White"></div>
-
-            <div class="White"></div>
-            <div class="Black"></div>
-            <div class="White"></div>
-            <div class="Black"></div>
-            <div class="White"></div>
-            <div class="Black"></div>
-            <div class="White"></div>
-            <div class="Black"></div>
-
-            <div class="Black"></div>
-            <div class="White"></div>
-            <div class="Black"></div>
-            <div class="White"></div>
-            <div class="Black"></div>
-            <div class="White"></div>
-            <div class="Black"></div>
-            <div class="White"></div>
-
-            <div class="White">&#9817;</div>
-            <div class="Black">&#9817;</div>
-            <div class="White">&#9817;</div>
-            <div class="Black">&#9817;</div>
-            <div class="White">&#9817;</div>
-            <div class="Black">&#9817;</div>
-            <div class="White">&#9817;</div>
-            <div class="Black">&#9817;</div>
-
-            <div class="Black">&#9814;</div>
-            <div class="White">&#9816;</div>
-            <div class="Black">&#9815;</div>
-            <div class="White">&#9813;</div>
-            <div class="Black">&#9812;</div>
-            <div class="White">&#9815;</div>
-            <div class="Black">&#9816;</div>
-            <div class="White">&#9814;</div>
-        </div> -->
+    <center>
     </p>
     <p style="text-align:center" style="color:#fff">
-    <form action={{ ui.direct }} method="post" style="text-align:center" style="color:#fff">
+    <form action={{ ui.direct }} method="post" disabled={{ ui.endgame }} style="text-align:center" style="color:#fff">
     <label style="color:#fff">{{ ui.inputlabel }}</label>
     <input type="text" name="player_input" value=""></p>
 	<p style="color:#fff">{{ ui.errmsg  }}</p>
 
-    <input type="submit" value="MOVE" style="text-align:center" style="color:#fff">
+    <input type="submit" value={{ ui.btnlabel }} style="text-align:center" style="color:#fff">
 	</form>
 	<form action="/undo" method="post" style="text-align:center" style="color:#fff">
 	<input type="submit" value="UNDO" style="text-align:center" style="color:#fff">
 	</form>
 	<br>
+	</center>
 
   </body>
   <footer>

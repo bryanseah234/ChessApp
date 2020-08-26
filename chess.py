@@ -6,6 +6,7 @@ class WebInterface:
         self.board = None
         self.winner = None
         self.direct = None
+        self.endgame = ' '
 
 
 
@@ -174,6 +175,7 @@ class Board:
         self.checkmate = None
         self.webdisplay = self.board_html()
         self.promotion = False
+        self.msg = ' '
     
     def coords(self):
         return list(self._position.keys())
@@ -248,13 +250,18 @@ class Board:
         coord= self.promotepawns()
         colour = self.turn
         if choice == 'r':
+            piece = "rook"
             promoted_piece = Rook(colour)
         elif choice == 'k':
+            piece = "knight"
             promoted_piece = Knight(colour)
         elif choice == 'b':
+            piece = "bishop"
             promoted_piece = Bishop(colour)
         elif choice == 'q':
+            piece = "queen"
             promoted_piece = Queen(colour)
+        self.msg = f'{self.turn} pawn has been promoted to {self.turn} {piece}'
         self.remove(coord)
         self.add(coord, promoted_piece)
 
@@ -341,6 +348,8 @@ class Board:
             print('')
 
     def start(self):
+        for coord in self.coords():
+            self.remove(coord)
         colour = 'Black'
         self.add((0, 7), Rook(colour))
         self.add((1, 7), Knight(colour))
@@ -461,19 +470,19 @@ class Board:
             return (start, end)
 
         # while True:
-        errmsg = None
+        self.msg = ' '
         # inputstr = input(f'{self.turn.title()} player: ')
         if not valid_format(inputstr):
-            errmsg = str('Invalid move. Please enter your move in the following format: __ __, _ represents a digit.')
-            # return errmsg
+            self.msg = str('Invalid move. Please enter your move in the following format: __ __, _ represents a digit.')
+            # return self.msg
         elif not valid_num(inputstr):
-            errmsg = str('Invalid move. Move digits should be 0-7.')
-            # return errmsg
+            self.msg = str('Invalid move. Move digits should be 0-7.')
+            # return self.msg
         else:
             start, end = split_and_convert(inputstr)
             if self.movetype(start, end) is None:
-                errmsg= str('Invalid move. Please make a valid move.')
-                # return errmsg
+                self.msg= str('Invalid move. Please make a valid move.')
+                # return self.msg
             else:
                 return start, end
 
@@ -501,20 +510,20 @@ class Board:
             return (start, end)
 
         # while True:
-        errmsg = None
+        self.msg = None
         # inputstr = input(f'{self.turn.title()} player: ')
         if not valid_format(inputstr):
-            errmsg = f"Invalid move. Please enter your move in the following format: __ __, _ represents a digit."
-            return errmsg
+            self.msg = f"Invalid move. Please enter your move in the following format: __ __, _ represents a digit."
+            return self.msg
         elif not valid_num(inputstr):
-            errmsg = f'Invalid move. Move digits should be 0-7.'
-            return errmsg
+            self.msg = f'Invalid move. Move digits should be 0-7.'
+            return self.msg
         else:
             start, end = split_and_convert(inputstr)
             if self.movetype(start, end) is None:
 
-                errmsg = f'Invalid move. Please make a valid move.'
-                return errmsg
+                self.msg = f'Invalid move. Please make a valid move.'
+                return self.msg
             else:
                 return False
                 
@@ -533,6 +542,7 @@ class Board:
             self.castle(start, end)
         elif movetype == 'capture':
             self.printmove(start, end, capture=True)
+            self.msg = f'{self.get_piece(start)} captured {self.get_piece(end)}'
             self.remove(end)
             self.move(start, end)
         elif movetype == 'move':
@@ -544,8 +554,10 @@ class Board:
         self.promotepawns()
         if not self.alive('White', 'king'):
             self.winner = 'Black'
+            self.msg = f'Black wins!'
         elif not self.alive('Black', 'king'):
             self.winner = 'White'
+            self.msg = f'White wins!'
 
     def next_turn(self):
         if self.debug:
