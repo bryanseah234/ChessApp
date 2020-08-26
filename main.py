@@ -36,8 +36,9 @@ def newgame():
 def play():
     # TODO: get player move from GET request object
     # TODO: if there is no player move, render the page template
-
-	if request.method == "POST":
+	if request.method == "GET":
+		pass
+	elif request.method == "POST":
 		Move = request.form['player_input']
 		ui.errmsg = ' '
 		if not game.validation(Move):
