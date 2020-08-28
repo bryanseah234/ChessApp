@@ -1,12 +1,13 @@
 from flask import Flask
 from flask import render_template, redirect
-from chess import WebInterface, Board
+from docs.chess import WebInterface, Board
 from flask import request
-from MoveHistory import MoveHistory
+from docs.MoveHistory import MoveHistory
 from copy import copy
 
 
-app = Flask(__name__)
+# app = Flask(__name__ )
+app = Flask(__name__, template_folder='docs/templates', static_folder='docs/static')
 ui = WebInterface()
 game = Board()
 history = MoveHistory(10)

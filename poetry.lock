@@ -8,6 +8,14 @@ version = "7.1.2"
 
 [[package]]
 category = "main"
+description = "The `fake-factory` package was deprecated on December 15th, 2016. Use the `Faker` package instead."
+name = "fake-factory"
+optional = false
+python-versions = "*"
+version = "9999.9.9"
+
+[[package]]
+category = "main"
 description = "A simple framework for building complex web applications."
 name = "flask"
 optional = false
@@ -76,13 +84,17 @@ dev = ["pytest", "pytest-timeout", "coverage", "tox", "sphinx", "pallets-sphinx-
 watchdog = ["watchdog"]
 
 [metadata]
-content-hash = "931c4d62a4018ab0b0b2c915ac64ea4ba608a548bde6d50b7e349e0081b50834"
+content-hash = "f0fe08a3c4cf0dc2dafe7e4a0dbb1bf7bd4c7ea16852932e74fc58b95753c1ab"
 python-versions = "^3.8"
 
 [metadata.files]
 click = [
     {file = "click-7.1.2-py2.py3-none-any.whl", hash = "sha256:dacca89f4bfadd5de3d7489b7c8a566eee0d3676333fbb50030263894c38c0dc"},
     {file = "click-7.1.2.tar.gz", hash = "sha256:d2b5255c7c6349bc1bd1e59e08cd12acbbd63ce649f2588755783aa94dfb6b1a"},
+]
+fake-factory = [
+    {file = "fake-factory-9999.9.9.tar.gz", hash = "sha256:f5bd18deb22ad8cb4402513c025877bc6b50de58902d686b6b21ba8981dce260"},
+    {file = "fake_factory-9999.9.9-py2.py3-none-any.whl", hash = "sha256:60c64a953c03e29fbee6b59fcb700c86a313778d68dc5816fc560ef515019d77"},
 ]
 flask = [
     {file = "Flask-1.1.2-py2.py3-none-any.whl", hash = "sha256:8a4fdd8936eba2512e9c85df320a37e694c93945b33ef33c89946a340a238557"},
