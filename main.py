@@ -29,7 +29,7 @@ def newgame():
     game.winner = None
     ui.winner = game.winner
     return redirect('/play')
-    return render_template('chess.html', ui=ui)
+
 
 @app.route('/play',methods=['POST', 'GET'])
 def play():
@@ -58,6 +58,7 @@ def play():
 				ui.direct = "/newgame"
 				ui.errmsg = game.msg
 				ui.btnlabel = "NEW GAME"
+				ui.board = game.board_html()
 				return render_template('chess.html', ui=ui, game=game)
 			ui.board = game.board_html()
 			game.next_turn()
