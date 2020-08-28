@@ -11,7 +11,6 @@ ui = WebInterface()
 game = Board()
 history = MoveHistory(10)
 
-
 @app.route('/')
 def root():
     return render_template('index.html')
