@@ -1,16 +1,48 @@
 @charset "UTF-8";
-.button {
-        background-color: #be2323;
-        border: 5px;
-        color: #5ea1a1;
-        padding: 20px 34px;
-        text-align: center;
-        display: inline-block;
-        font-size: 20px;
-        margin: 4px 2px;
-        cursor: pointer;
-}
+.wrapper { 
+  height: 100%;
+  width: 100%;
+  left:0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  position: absolute;
+background: linear-gradient(124deg, #ff2400, #e81d1d, #e8b71d, #e3e81d, #1de840, #1ddde8, #2b1de8, #dd00f3, #dd00f3);
+background-size: 1800% 1800%;
 
+-webkit-animation: rainbow 8s ease infinite;
+-z-animation: rainbow 8s ease infinite;
+-o-animation: rainbow 8s ease infinite;
+  animation: rainbow 8s ease infinite;}
+
+@-webkit-keyframes rainbow {
+    0%{background-position:0% 82%}
+    50%{background-position:100% 19%}
+    100%{background-position:0% 82%}
+}
+@-moz-keyframes rainbow {
+    0%{background-position:0% 82%}
+    50%{background-position:100% 19%}
+    100%{background-position:0% 82%}
+}
+@-o-keyframes rainbow {
+    0%{background-position:0% 82%}
+    50%{background-position:100% 19%}
+    100%{background-position:0% 82%}
+}
+@keyframes rainbow { 
+    0%{background-position:0% 82%}
+    50%{background-position:100% 19%}
+    100%{background-position:0% 82%}
+}
+.button {
+        border: 1px;
+        /* color: #000000; */
+        text-align: center;
+        font-size: 40px;
+		padding: 0px;
+		margin: 0px;
+}
 .chessboard{
         width:468px;
         height:468px;
@@ -71,3 +103,29 @@ h4{
 	color: white;
 	border: 1px solid #fff;
 } */
+
+.transparent {
+	/* Required for IE 5, 6, 7 */
+	/* ...or something to trigger hasLayout, like zoom: 1; */
+	width: 100%; 
+		
+	/* Theoretically for IE 8 & 9 (more valid) */	
+	/* ...but not required as filter works too */
+	/* should come BEFORE filter */
+	-ms-filter:"progid:DXImageTransform.Microsoft.Alpha(Opacity=50)";
+	
+	/* This works in IE 8 & 9 too */
+	/* ... but also 5, 6, 7 */
+	filter: alpha(opacity=50);
+	
+	/* Older than Firefox 0.9 */
+	-moz-opacity:0.5;
+	
+	/* Safari 1.x (pre WebKit!) */
+	-khtml-opacity: 0.5;
+    
+	/* Modern!
+	/* Firefox 0.9+, Safari 2?, Chrome any?
+	/* Opera 9+, IE 9+ */
+	opacity: 0.5;
+}
