@@ -9,16 +9,18 @@ Vina, Bryan, David
 ## Project objective
 To implement a web app that can:
 
-display a chess board
-validate and process the user's move
-Submission
+1. display a chess board
+2. validate and process the user's move
+
+## Submission
 Each group is to submit:
 
-A repl link to a working web app,
-An individual video (not more than 5 min) explaining how the following features were applied:
-main game features
-undo feature (Move History)
-Grading criteria
+1. A repl link to a working web app,
+2. An individual video (not more than 5 min) explaining how the following features were applied:
+- main game features
+- undo feature (Move History)
+
+## Grading criteria
 Each criteria is assigned a score of 0-2 depending on how well the requirements were met.
 
 For web app repl:
