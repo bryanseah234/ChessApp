@@ -1,10 +1,10 @@
-import os
 from flask import Flask
 from flask import render_template, redirect
 from docs.chess import WebInterface, Board
 from flask import request
 from docs.MoveHistory import MoveHistory
 from copy import copy
+from flask import Flask, render_template
 
 
 # app = Flask(__name__ )
@@ -12,6 +12,7 @@ app = Flask(__name__, template_folder='docs/templates', static_folder='docs/stat
 ui = WebInterface()
 game = Board()
 history = MoveHistory(10)
+
 
 @app.route('/')
 def root():
