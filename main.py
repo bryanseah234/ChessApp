@@ -1,3 +1,4 @@
+import os
 from flask import Flask
 from flask import render_template, redirect
 from docs.chess import WebInterface, Board
