@@ -82,21 +82,31 @@ background-size: 1800% 1800%;
         vertical-align:middle;
         border:1px solid #c0c0c0;
         }
+.sub{
+        margin-left:auto;
+        margin-right:auto;
+		margin:1px;
+		}
+
 .title{
-        text-align: center;
-        color: #fff;}
+        margin-left:auto;
+        margin-right:auto;
+		margin:1px;
+		}
+h1{
+		text-align: center;
+    	color: #fff;
+		text-align: center;
+        margin-left:auto;
+        margin-right:auto;
+		}
+
 p{
     text-align:center;
 	color: #fff;
 }
 
-h1{
-	color: #fff;
-}
 
-h4{
-	color: #fff;
-}
 /* .myDiv {
     text-align: center;
     width: 300px;
