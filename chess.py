@@ -473,15 +473,15 @@ class Board:
         self.msg = ' '
         # inputstr = input(f'{self.turn.title()} player: ')
         if not valid_format(inputstr):
-            self.msg = str('Invalid move. Please enter your move in the following format: __ __, _ represents a digit.')
+            self.msg = str('Invalid move.\n[Please enter your move in the following format: __ __, where __ represents 2 digits]')
             # return self.msg
         elif not valid_num(inputstr):
-            self.msg = str('Invalid move. Move digits should be 0-7.')
+            self.msg = str('Invalid move.\n[Move digits should be 0-7]')
             # return self.msg
         else:
             start, end = split_and_convert(inputstr)
             if self.movetype(start, end) is None:
-                self.msg= str('Invalid move. Please make a valid move.')
+                self.msg= str('Invalid move.\n[Please make a valid move]')
                 # return self.msg
             else:
                 return start, end
@@ -513,16 +513,16 @@ class Board:
         self.msg = None
         # inputstr = input(f'{self.turn.title()} player: ')
         if not valid_format(inputstr):
-            self.msg = f"Invalid move. Please enter your move in the following format: __ __, _ represents a digit."
+            self.msg = f"Invalid move.\n[Please enter your move in the following format: __ __, where __ represents 2 digits]"
             return self.msg
         elif not valid_num(inputstr):
-            self.msg = f'Invalid move. Move digits should be 0-7.'
+            self.msg = f'Invalid move.\n[Move digits should be 0-7]'
             return self.msg
         else:
             start, end = split_and_convert(inputstr)
             if self.movetype(start, end) is None:
 
-                self.msg = f'Invalid move. Please make a valid move.'
+                self.msg = f'Invalid move.\n[Please make a valid move]'
                 return self.msg
             else:
                 return False
