@@ -7,18 +7,16 @@ from copy import copy
 from flask import Flask, render_template
 
 
-# app = Flask(__name__ )
 app = Flask(__name__)
-ui = WebInterface()
-game = Board()
-history = MoveHistory(10)
+ui = WebInterface() #create instance of webinterface
+game = Board() #create instance of the board
+history = MoveHistory(10) #creates linkedlist of size 10
 
-
-@app.route('/')
+@app.route('/') #returns index.html which is our start page
 def root():
     return render_template('index.html')
 
-@app.route('/newgame', methods=['POST','GET'])
+@app.route('/newgame', methods=['POST','GET']) #returns the chess.html which contains our chessboard and redirects to /play
 def newgame():
     # Note that in Python, objects and variables
     # in the global space are available to
@@ -34,7 +32,7 @@ def newgame():
     return redirect('/play')
 
 
-@app.route('/play',methods=['POST', 'GET'])
+@app.route('/play',methods=['POST', 'GET']) #returns correct thing according to gameplay, redirects to /promote if necessary
 def play():
     # TODO: get player move from GET request object
     # TODO: if there is no player move, render the page template
@@ -78,7 +76,7 @@ def play():
     # If move is valid, check for pawns to promote
     # Redirect to /promote if there are pawns to promote, otherwise 
 
-@app.route('/promote', methods=['POST', 'GET'])
+@app.route('/promote', methods=['POST', 'GET']) #prompts the user to choose which piece to promote to, only allow player to continue playing (/play) when he promotes correctly
 def promote():
     ui.board = game.board_html()
     ui.inputlabel = f'{game.turn} pawn promote to (Please choose from r, k, b, or q):'
@@ -101,7 +99,7 @@ def promote():
             return redirect('/play')
     return render_template('chess.html', ui=ui, game=game)
 
-@app.route('/undo',methods=['POST', 'GET'])
+@app.route('/undo',methods=['POST', 'GET']) #gets the previous version of the chessboard board from movehistory.py (stores versions of chess.html) and returns it, redirects to /play
 def undo():
 	move = history.pop()
 	if move == None:

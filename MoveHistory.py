@@ -27,3 +27,5 @@ class MoveHistory:
 		else:
 			self.head -= 1
 		return move
+
+#singly linked list implementation of movehistory to allow users to undo their moves, stores copies of chess.html into each node and allow it to be popped off and returned to main.py (/undo) to be rendered

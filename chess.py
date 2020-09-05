@@ -1,4 +1,4 @@
-class WebInterface:
+class WebInterface: #allows these attributes to be used with the object in main.py after creating an instance of it (aka the UI)
     def __init__(self):
         self.inputlabel = None
         self.btnlabel = None
@@ -9,13 +9,12 @@ class WebInterface:
         self.endgame = ' '
 
 
-
 class MoveError(Exception):
     '''Custom error for invalid moves.'''
     pass
 
 
-class BasePiece:
+class BasePiece: 
     def __init__(self,colour):
         if type(colour) != str:
             raise TypeError('colour argument must be str')
@@ -183,7 +182,7 @@ class Board:
     def pieces(self):
         return list(self._position.values())
 
-    def add(self, coord: tuple, piece):
+    def add(self, coord: tuple, piece): #tuple for coordinate so it cannot be edited, changed
         self._position[coord] = piece
 
     def move(self, start, end):
