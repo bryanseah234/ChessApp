@@ -4,11 +4,13 @@ A repository for a chess app in Python (NYJC J1 Computing Assignment 13)
 ## Disclaimer:
 1. NONE
 
-## Team members:
-Vina, Bryan, David
-
 ## Demo:
 http://skittles-chessapp.herokuapp.com/
+
+## Team members:
+1. Vina
+2. Bryan
+3. David
 
 ## Project objective:
 To implement a web app that can:
