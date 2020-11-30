@@ -1,21 +1,22 @@
 # Skittles ChessApp
-
 A repository for a chess app in Python (NYJC J1 Computing Assignment 13)
 
-## Team members
+## Disclaimer:
+1. NONE
 
+## Team members:
 Vina, Bryan, David
 
-## Demo
+## Demo:
 http://skittles-chessapp.herokuapp.com/
 
-## Project objective
+## Project objective:
 To implement a web app that can:
 
 1. display a chess board
 2. validate and process the user's move
 
-## Submission
+## Submission:
 Each group is to submit:
 
 1. A repl link to a working web app,
@@ -23,7 +24,7 @@ Each group is to submit:
 - main game features
 - undo feature (Move History)
 
-## Grading criteria
+## Grading criteria:
 Each criteria is assigned a score of 0-2 depending on how well the requirements were met.
 
 For web app repl:
