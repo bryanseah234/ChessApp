@@ -12,6 +12,23 @@ ui = WebInterface() #create instance of webinterface
 game = Board() #create instance of the board
 history = MoveHistory(10) #creates linkedlist of size 10
 
+@app.after_request
+def add_header(r):
+    """
+    Add headers to both force latest IE rendering engine or Chrome Frame,
+    and also to cache the rendered page for 10 minutes.
+    """
+    r.headers["Cache-Control"] = "no-cache, no-store, must-revalidate"
+    r.headers["Pragma"] = "no-cache"
+    r.headers["Expires"] = "0"
+    r.headers['Cache-Control'] = 'public, max-age=0'
+    return r
+
+@app.after_request
+def add_header(response):
+    response.cache_control.max_age = 0
+    return response
+
 @app.route('/') #returns index.html which is our start page
 def root():
     return render_template('index.html')
@@ -120,4 +137,4 @@ def undo():
 	return redirect('/play')
 
 if __name__ == '__main__':
-    app.run("0.0.0.0",debug=True, use_reloader=True)
+    app.run("0.0.0.0",debug=False, use_reloader=True)
